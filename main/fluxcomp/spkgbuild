@@ -1,0 +1,17 @@
+# description : fluxcomp Language used by directfb 
+# depends	:  
+
+name=fluxcomp
+version=1.4.4
+release=1
+_commit=d873d29617b4174418e9603f5bcd8f958ca9c793
+source="$name-$_commit.tar.gz::https://github.com/kevleyski/fluxcomp/archive/$_commit.tar.gz"
+
+build() {
+    cd $name-$_commit
+    autoreconf -i
+    ./configure --prefix=/usr
+    make
+	make PREFIX=$PKG/usr DESTDIR=$PKG install
+}
+

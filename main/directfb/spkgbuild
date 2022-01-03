@@ -1,0 +1,22 @@
+# description : DirectFB framebuffer
+# depends	: fluxcomp 
+
+name=directfb
+version=1_7_7
+release=1
+source="https://github.com/deniskropp/DirectFB/archive/DIRECTFB_$version.tar.gz
+        config_fix.patch"
+
+build() {
+	cd DirectFB-DIRECTFB_$version
+
+    libtoolize
+    aclocal
+    autoheader
+    automake --add-missing
+    autoreconf -v
+    patch -p0 < $SRC/config_fix.patch
+    ./configure --enable-sdl --disable-x11 --disable-vnc --disable-osx --enable-mesa --enable-drmkms --prefix=/usr
+    make
+	make PREFIX=$PKG/usr DESTDIR=$PKG install
+}
