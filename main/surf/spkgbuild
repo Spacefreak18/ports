@@ -2,13 +2,16 @@
 # depends	: webkitgtk gtk3 pango harfbuzz atk cairo gdk-pixbuf libsoup glib libx11 gcr p11-kit
 
 name=surf
-version=20200408
+version=20210921
 release=1
-_commit=0787787f863fe34531ee2670a9277e2b327a3b42
-source="$name-$_commit.tar.gz::https://github.com/emmett1/surf/archive/$_commit.tar.gz"
+_commit=ad6ab384bf30666bd1910472f72980bcc84c4e24
+source="$name-$_commit.tar.gz::https://github.com/mrdotx/surf/archive/$_commit.tar.gz
+        custom.patch"
 
 build() {
 	cd $name-$_commit
+	cp config.def.h config.h
+	patch -p0 < $SRC/custom.patch
 	make PREFIX=/usr
 	make PREFIX=/usr DESTDIR=$PKG install
 }
