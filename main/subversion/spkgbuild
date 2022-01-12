@@ -1,5 +1,5 @@
 # description	: subversion version control
-# depends	:  sqlite zlib lz4 openssl utf8proc serf
+# depends	:  sqlite zlib lz4 openssl utf8proc serf libsecret
 
 name=subversion
 version=1.14.1
@@ -9,7 +9,8 @@ source="https://dlcdn.apache.org/$name/$name-$version.tar.gz"
 build() {
 	cd $name-$version
 
-	./configure --prefix=/usr
+    grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
+	PYTHON=python3 ./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 }

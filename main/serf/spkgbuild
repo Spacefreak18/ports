@@ -5,10 +5,12 @@ name=serf
 version=1.3.9
 release=1
 source="https://www.apache.org/dist/$name/$name-$version.tar.bz2
+        https://www.linuxfromscratch.org/patches/blfs/svn/$name-$version-openssl3_fixes-1.patch
         SConstruct"
 
 build() {
 	cd $name-$version
+	patch -Np1 -i $SRC/$name-$version-openssl3_fixes-1.patch
 	mv SConstruct SConstruct.bak
     cp $SRC/SConstruct ./
     #sed -i "/Append/s:RPATH=libdir,::" SConstruct
@@ -16,6 +18,6 @@ build() {
     #sed -i "/Alias/s:install_static,::" SConstruct
     #sed -i "/   print/{s/print/princ(/; s/$/)/}" SConstruct
     #sed -i "/get_contents()/s/,/.decode()&/" SConstruct
-    scons PREFIX=/usr GSSAPI=/usr/bin/krb5-config
+    scons PREFIX=/usr GSSAPI=/usr
     scons PREFIX=$PKG/usr install
 }
