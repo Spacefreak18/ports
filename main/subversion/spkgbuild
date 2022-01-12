@@ -1,5 +1,5 @@
 # description	: subversion version control
-# depends	: apr apr-util sqlite zlib lz4 openssl utf8proc
+# depends	:  sqlite zlib lz4 openssl utf8proc serf
 
 name=subversion
 version=1.14.1
