@@ -10,7 +10,7 @@ build() {
 	cd $name-$version
     grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
     ./autogen.sh
-    PYTHON=python3 ./configure --enable-maintainer-mode --prefix=/usr --disable-shared --with-serf --with-gnome-keyring=no
+    PYTHON=python3 ./configure --prefix=/usr --disable-static --disable-shared --with-serf --with-gnome-keyring=no
 	make
 	make DESTDIR=$PKG install
 }
