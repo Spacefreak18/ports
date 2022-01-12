@@ -10,7 +10,7 @@ build() {
 	cd $name-$version
 
     grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
-	PYTHON=python3 ./configure --prefix=/usr
-	make
+	PYTHON=python3 ./configure --prefix=/usr --disable-static
+	make -j1
 	make DESTDIR=$PKG install
 }
