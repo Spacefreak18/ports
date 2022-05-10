@@ -1,0 +1,11 @@
+--- libcap/cap_file.c	2021-12-29 22:47:50.224973218 +0000
++++ libcap/cap_file.c	2022-05-06 15:38:26.752155180 +0000
+@@ -246,8 +246,6 @@
+ 	struct vfs_ns_cap_data rawvfscap;
+ 	int sizeofcaps;
+ 
+-	_cap_debug("getting filename capabilities");
+-
+ 	/* fill the capability sets via a system call */
+ 	sizeofcaps = getxattr(filename, XATTR_NAME_CAPS,
+ 			      &rawvfscap, sizeof(rawvfscap));
