@@ -1,0 +1,20 @@
+--- event.c	2022-05-06 15:26:05.212163704 +0000
++++ event.c	2022-05-06 15:16:13.678837169 +0000
+@@ -531,8 +531,6 @@
+ 		if (client_is_dead(p->action.fd)) {
+ 			struct ucred cred;
+ 			/* closed */
+-			acpid_log(LOG_NOTICE,
+-			    "client %s has disconnected", p->origin);
+ 			delist_rule(&client_list, p);
+ 			ud_get_peercred(p->action.fd, &cred);
+ 			if (cred.uid != 0) {
+@@ -729,8 +727,6 @@
+ 	if (r < 0 && errno == EPIPE) {
+ 		struct ucred cred;
+ 		/* closed */
+-		acpid_log(LOG_NOTICE,
+-		    "client %s has disconnected", rule->origin);
+ 		delist_rule(&client_list, rule);
+ 		ud_get_peercred(rule->action.fd, &cred);
+ 		if (cred.uid != 0) {

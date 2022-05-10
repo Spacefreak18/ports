@@ -5,10 +5,13 @@ name=acpid
 version=2.0.33
 release=1
 source="https://downloads.sourceforge.net/acpid2/$name-$version.tar.xz
+	event.c.patch
 	rc.$name"
 
 build() {
 	cd $name-$version
+
+	patch -p0 < $SRC/event.c.patch
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
